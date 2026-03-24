@@ -5,6 +5,7 @@ import {
   Phone, ArrowRight, Droplets, Sparkles, Car
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { QuoteModal } from './QuoteModal';
 
 export const Hero = ({ onBookClick }: { onBookClick: () => void }) => {
   return (
@@ -376,31 +377,40 @@ export const FAQ = () => {
 };
 
 export const CTA = ({ onBookClick }: { onBookClick: () => void }) => {
-  return (
-    <section className="py-24 bg-brand text-black relative overflow-hidden">
-      {/* Abstract shapes */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <h2 className="font-display text-5xl sm:text-7xl leading-[0.9] mb-6 uppercase">
-          Ready for the Venice Treatment?
-        </h2>
-        <p className="text-lg sm:text-xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
-          View pricing and book any service online 24/7. No credit card required. Experience premium detailing at your convenience.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button 
-            onClick={onBookClick}
-            className="bg-black text-white px-10 py-5 font-bold text-sm uppercase tracking-widest hover:bg-zinc-900 transition-colors"
-          >
-            Book Online Now
-          </button>
-          <button className="border-2 border-black text-black px-10 py-5 font-bold text-sm uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
-            Request Custom Quote
-          </button>
+  return (
+    <>
+      <section className="py-24 bg-brand text-black relative overflow-hidden">
+        {/* Abstract shapes */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="font-display text-5xl sm:text-7xl leading-[0.9] mb-6 uppercase">
+            Ready for the Venice Treatment?
+          </h2>
+          <p className="text-lg sm:text-xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
+            View pricing and book any service online 24/7. No credit card required. Experience premium detailing at your convenience.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <button 
+              onClick={onBookClick}
+              className="bg-black text-white px-10 py-5 font-bold text-sm uppercase tracking-widest hover:bg-zinc-900 transition-colors"
+            >
+              Book Online Now
+            </button>
+            <button 
+              onClick={() => setIsQuoteOpen(true)}
+              className="border-2 border-black text-black px-10 py-5 font-bold text-sm uppercase tracking-widest hover:bg-black hover:text-white transition-colors"
+            >
+              Request Custom Quote
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
+    </>
   );
 };
